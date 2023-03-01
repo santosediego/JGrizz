@@ -4,13 +4,13 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_clients")
+@Table(name = "tb_client")
 public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,13 +24,11 @@ public class Client implements Serializable {
     @Column(length = 50)
     private String email;
 
-    @OneToMany(mappedBy = "Order")
-    private List<Order> orders = new ArrayList<>();
-
+   // @OneToMany(mappedBy = "Order")
+    //duvida
     public Client (){
 
     }
-
     public Client(Long id, String name, String phone, String network, String email) {
         this.id = id;
         this.name = name;
@@ -78,7 +76,6 @@ public class Client implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,7 +85,6 @@ public class Client implements Serializable {
                 client.getPhone()) && Objects.equals(getNetwork(),
                 client.getNetwork()) && Objects.equals(getEmail(), client.getEmail());
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName(), getPhone(), getNetwork(), getEmail());
