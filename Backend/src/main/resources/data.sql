@@ -12,3 +12,5 @@ INSERT INTO TB_ILLUSTRATION (COMMENTS, DESCRIPTION, PRICE) VALUES ('Loren Ipson 
 INSERT INTO TB_ILLUSTRATION (COMMENTS, DESCRIPTION, PRICE) VALUES ('Loren Ipson loren ipson loren ipson', 'Ilustração estilo E com dois personagem', 150.00 );
 INSERT INTO TB_ILLUSTRATION (COMMENTS, DESCRIPTION, PRICE) VALUES ('Loren Ipson loren ipson loren ipson', 'Ilustração estilo F com três personagem', 120.00 );
 
+INSERT INTO TB_USER (PASSWORD, USERNAME) VALUES ('senha123', 'Victoria Barros');
+INSERT INTO TB_USER (PASSWORD, USERNAME) VALUES ('senha123', 'Diego Santos');
