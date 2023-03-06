@@ -1,8 +1,11 @@
 package com.barrosvictoria.JGrizz.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_illustration")
@@ -18,9 +21,14 @@ public class Illustration implements Serializable {
     @Column
     private Double price;
 
-    //@OneToMany
-    public Illustration (){
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "id.illustration")
+    private Set<IllustrationOrder> itens = new HashSet<>();
+    //O Set acima é para que o próprio Java garante que não haja pedidos repetidos;
+
+
+    public Illustration (){
     }
     public Illustration(Long id, String description, String comments, Double price) {
         this.id = id;

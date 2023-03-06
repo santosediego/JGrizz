@@ -1,5 +1,6 @@
 package com.barrosvictoria.JGrizz.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -24,10 +25,12 @@ public class Client implements Serializable {
     @Column(length = 50)
     private String email;
 
-   // @OneToMany(mappedBy = "Order")
-    //duvida
-    public Client (){
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
+
+    public Client (){
     }
     public Client(Long id, String name, String phone, String network, String email) {
         this.id = id;
