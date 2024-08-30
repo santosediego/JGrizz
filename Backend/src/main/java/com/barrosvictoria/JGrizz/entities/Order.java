@@ -1,13 +1,15 @@
 package com.barrosvictoria.JGrizz.entities;
 
 import com.barrosvictoria.JGrizz.entities.enums.PaymentStatus;
-import com.barrosvictoria.JGrizz.entities.enums.ReceiptTypes;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -23,7 +25,9 @@ public class Order implements Serializable {
     private String comments;
     private PaymentStatus payment;
     private Double price;
-    private ReceiptTypes receipt;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receipt_type_id")
+    private ReceiptType receipt;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date delivery;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
@@ -43,7 +47,7 @@ public class Order implements Serializable {
     }
     public Order(Long id, String description, String comments,
                  PaymentStatus payment, Double price,
-                 ReceiptTypes receipt, Date delivery,
+                 ReceiptType receipt, Date delivery,
                  Instant creationDate, Instant updateDate) {
         this.id = id;
         this.description = description;
@@ -95,11 +99,11 @@ public class Order implements Serializable {
         this.price = price;
     }
 
-    public ReceiptTypes getReceipt() {
+    public ReceiptType getReceipt() {
         return receipt;
     }
 
-    public void setReceipt(ReceiptTypes receipt) {
+    public void setReceipt(ReceiptType receipt) {
         this.receipt = receipt;
     }
 
