@@ -18,9 +18,9 @@ INSERT INTO TB_CLIENT (EMAIL, NAME, NETWORK, PHONE) VALUES ('gabriela@email.com'
 INSERT INTO TB_CLIENT (EMAIL, NAME, NETWORK, PHONE) VALUES ('juliana@email.com', 'Juliana Alves', '@jalves', '14987569872');
 INSERT INTO TB_CLIENT (EMAIL, NAME, NETWORK, PHONE) VALUES ('gabriel@email.com', 'Gabriel Bernardes', '@gbernardes', '21987563218');
 
-INSERT INTO TB_ORDER (DESCRIPTION, COMMENTS, CLIENT_ID, PAYMENT, PRICE, RECEIPT_TYPE_ID, DELIVERY, CREATION_DATE) VALUES ('Lorem ipsum dolor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Aenean euismod tincidunt sapien, non efficitur dui dignissim non. Proin ac enim eget risus posuere consequat. Aliquam erat volutpat. Donec a dui vitae odio commodo vestibulum vel nec erat.',1, 2, 120.00, 1, '2024-08-29', NOW());
-INSERT INTO TB_ORDER (DESCRIPTION, COMMENTS, CLIENT_ID, PAYMENT, PRICE, RECEIPT_TYPE_ID, DELIVERY, CREATION_DATE) VALUES ('Lorem ipsum dolor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Aenean euismod tincidunt sapien, non efficitur dui dignissim non. Proin ac enim eget risus posuere consequat. Aliquam erat volutpat. Donec a dui vitae odio commodo vestibulum vel nec erat.',2, 2, 200.00, 2, '2024-08-29', NOW());
+INSERT INTO TB_ORDER (DESCRIPTION, COMMENTS, CLIENT_ID, PAYMENT, RECEIPT_TYPE_ID, DELIVERY, CREATION_DATE) VALUES ('Lorem ipsum dolor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Aenean euismod tincidunt sapien, non efficitur dui dignissim non. Proin ac enim eget risus posuere consequat. Aliquam erat volutpat. Donec a dui vitae odio commodo vestibulum vel nec erat.',1, 2, 1, '2024-08-29', NOW());
+INSERT INTO TB_ORDER (DESCRIPTION, COMMENTS, CLIENT_ID, PAYMENT, RECEIPT_TYPE_ID, DELIVERY, CREATION_DATE) VALUES ('Lorem ipsum dolor', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Aenean euismod tincidunt sapien, non efficitur dui dignissim non. Proin ac enim eget risus posuere consequat. Aliquam erat volutpat. Donec a dui vitae odio commodo vestibulum vel nec erat.',2, 2, 2, '2024-08-29', NOW());
 
-INSERT INTO ILLUSTRATION_ORDER (PRICE, QUANTITY, ILLUSTRATION_ID, ORDER_ID) VALUES (120.00, 1, 1, 1);
-INSERT INTO ILLUSTRATION_ORDER (PRICE, QUANTITY, ILLUSTRATION_ID, ORDER_ID) VALUES (120.00, 1, 1, 2);
-INSERT INTO ILLUSTRATION_ORDER (PRICE, QUANTITY, ILLUSTRATION_ID, ORDER_ID) VALUES (80.00, 1, 2, 2);
+INSERT INTO ILLUSTRATION_ORDER (PRICE, QUANTITY, DISCOUNT, ILLUSTRATION_ID, ORDER_ID) VALUES (120.00, 1, 0, 1, 1);
+INSERT INTO ILLUSTRATION_ORDER (PRICE, QUANTITY, DISCOUNT, ILLUSTRATION_ID, ORDER_ID) VALUES (120.00, 1, 0, 1, 2);
+INSERT INTO ILLUSTRATION_ORDER (PRICE, QUANTITY, DISCOUNT, ILLUSTRATION_ID, ORDER_ID) VALUES (80.00, 1, 0, 2, 2);

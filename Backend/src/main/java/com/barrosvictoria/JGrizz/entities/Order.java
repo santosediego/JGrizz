@@ -18,13 +18,11 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(length = 120)
     private String description;
     @Column(length = 300)
     private String comments;
     private PaymentStatus payment;
-    private Double price;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receipt_type_id")
     private ReceiptType receipt;
@@ -40,25 +38,24 @@ public class Order implements Serializable {
     private Client client;
 
     @OneToMany(mappedBy = "id.order")
-    private Set<IllustrationOrder> itens = new HashSet<>();
-    //O Set acima é para que o próprio Java garante que não haja pedidos repetidos;
+    private Set<IllustrationOrder> items = new HashSet<>();
+    //O Set acima é para que o próprio Java garanta que não haja pedidos repetidos;
 
-    public Order(){
+    public Order() {
     }
-    public Order(Long id, String description, String comments,
-                 PaymentStatus payment, Double price,
-                 ReceiptType receipt, Date delivery,
-                 Instant creationDate, Instant updateDate) {
+
+    public Order(Long id, String description, String comments, PaymentStatus payment, ReceiptType receipt, Date delivery, Instant creationDate, Instant updateDate, Client client) {
         this.id = id;
         this.description = description;
         this.comments = comments;
         this.payment = payment;
-        this.price = price;
         this.receipt = receipt;
         this.delivery = delivery;
         this.creationDate = creationDate;
         this.updateDate = updateDate;
+        this.client = client;
     }
+
     public Long getId() {
         return id;
     }
@@ -91,14 +88,6 @@ public class Order implements Serializable {
         this.payment = payment;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public ReceiptType getReceipt() {
         return receipt;
     }
@@ -113,6 +102,14 @@ public class Order implements Serializable {
 
     public void setDelivery(Date delivery) {
         this.delivery = delivery;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Instant getCreationDate() {
@@ -130,6 +127,15 @@ public class Order implements Serializable {
     public void setUpdateDate(Instant updateDate) {
         this.updateDate = updateDate;
     }
+
+    public Set<IllustrationOrder> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<IllustrationOrder> items) {
+        this.items = items;
+    }
+
     @PrePersist
     public void prePersist() {
         creationDate = Instant.now();
@@ -139,25 +145,26 @@ public class Order implements Serializable {
     public void preUpdate() {
         updateDate = Instant.now();
     }
+
+    public double getTotalValue() {
+        double sum = 0.0;
+
+        for (IllustrationOrder io : items) {
+            sum = sum + io.getSubTotal();
+        }
+        return sum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Order order)) return false;
-        return Objects.equals(getId(), order.getId()) && Objects.equals(getDescription(),
-                order.getDescription()) && Objects.equals(getComments(),
-                order.getComments()) && Objects.equals(getPayment(),
-                order.getPayment()) && Objects.equals(getPrice(),
-                order.getPrice()) && Objects.equals(getReceipt(),
-                order.getReceipt()) && Objects.equals(getDelivery(),
-                order.getDelivery()) && Objects.equals(getCreationDate(),
-                order.getCreationDate()) && Objects.equals(getUpdateDate(),
-                order.getUpdateDate());
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDescription(), getComments(),
-                getPayment(), getPrice(), getReceipt(), getDelivery(),
-                getCreationDate(), getUpdateDate());
+        return Objects.hashCode(id);
     }
 }

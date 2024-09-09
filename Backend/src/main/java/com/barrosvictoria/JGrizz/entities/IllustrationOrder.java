@@ -16,13 +16,13 @@ public class IllustrationOrder implements Serializable {
 
     private Integer quantity;
     private Double price;
+    private Double discount;
 
     public IllustrationOrder(){
     }
 
     public IllustrationOrder(Order order, Illustration illustration,
                              Integer quantity, Double price) {
-        super();
         id.setOrder(order);
         id.setIllustration(illustration);
         this.quantity = quantity;
@@ -33,8 +33,20 @@ public class IllustrationOrder implements Serializable {
         return price * quantity;
     }
 
-    public IllustrationOrderPK getId() {
-        return id;
+    public Illustration getIllustration() {
+        return id.getIllustration();
+    }
+
+    public void setIllustration (Illustration illustration){
+        id.setIllustration(illustration);
+    }
+
+    public Order getOrder() {
+        return id.getOrder();
+    }
+
+    public void setOrder (Order order){
+        id.setOrder(order);
     }
 
     public void setId(IllustrationOrderPK id) {
@@ -55,5 +67,13 @@ public class IllustrationOrder implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 }
