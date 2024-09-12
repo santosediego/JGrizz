@@ -50,4 +50,10 @@ public class ClientController implements Serializable {
 
         return ResponseEntity.ok().body(newDTO);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<ClientDTO> delete(@PathVariable Long id) {
+        clientService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
